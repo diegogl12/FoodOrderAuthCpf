@@ -11,6 +11,8 @@ defmodule AuthCpf.Clients.FoodOrderClient do
         {:ok, body}
       {:ok, %{status: 404}, body: reason} ->
         {:error, :not_found, reason}
+      {:error, %Mint.TransportError{reason: reason}} ->
+        {:error, :connection_error, "Failed to connect to service"}
       {_, reason} -> {:error, :internal_server_error, reason}
     end
   end
