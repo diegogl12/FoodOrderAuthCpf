@@ -18,7 +18,9 @@ defmodule Endpoints do
     Logger.info("Authenticating the following cpf: #{cpf}...")
 
     case FoodOrderClient.fetch_by_cpf(cpf) do
-      {:ok, _} -> send_resp(conn, 200, "Cpf #{cpf} authenticated!")
+      {:ok, reason} -> 
+        Logger.info("Request authenticated: #{inspect(reason)}")
+        send_resp(conn, 200, "Cpf #{cpf} authenticated!")
       {:error, error, reason} -> 
         Logger.error("Request error: #{reason}")
         send_resp(conn, 403, "Not authorized! Reason: #{error}")

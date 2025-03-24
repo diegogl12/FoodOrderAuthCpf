@@ -1,5 +1,6 @@
 defmodule AuthCpf.Clients.FoodOrderClient do
 
+  def fetch_by_cpf("12345"), do: {:ok, %{message: "Dummy request"}}
   def fetch_by_cpf(cpf) do
     client = Tesla.client([
       {Tesla.Middleware.BaseUrl, base_url()}, 
