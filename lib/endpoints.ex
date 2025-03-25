@@ -10,11 +10,16 @@ defmodule Endpoints do
 
   plug :dispatch
 
-  get "/" do
+  get "/api/health" do
     send_resp(conn, 200, "Hello... All good!")
   end
 
-  get "auth/:cpf" do
+  get "/auth" do
+
+    IO.inspect(conn.req_headers)
+    [{_, cpf}] = conn.req_headers |> Enum.filter(fn {cpf_header, _} -> cpf_header == "cpf" end)
+
+
     Logger.info("Authenticating the following cpf: #{cpf}...")
 
     case FoodOrderClient.fetch_by_cpf(cpf) do
