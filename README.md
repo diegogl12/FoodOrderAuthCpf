@@ -1,21 +1,21 @@
 # AuthCpf
 
-**TODO: Add description**
+AuthCpf é um serviço responsável por validar o CPF recebido no header de requisições, verificando sua disponibilidade no banco de dados do serviço FoodOrder. Caso o CPF esteja disponível, a autenticação é realizada com sucesso. Caso contrário, a requisição é negada com status 403.
 
-## Installation
+## Como Rodar o Projeto
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `auth_cpf` to your list of dependencies in `mix.exs`:
+Para rodar o serviço localmente, execute o comando abaixo no terminal:
 
-```elixir
-def deps do
-  [
-    {:auth_cpf, "~> 0.1.0"}
-  ]
-end
+```bash
+iex -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/auth_cpf>.
+Certifique-se de ter todas as dependências instaladas e o ambiente configurado corretamente antes de executar o comando.
+
+## Funcionamento
+
+1. O serviço recebe uma requisição HTTP com o CPF no header.
+2. Ele consulta o endpoint do serviço FoodOrder para verificar se o CPF está disponível no banco de dados.
+   - Se o CPF estiver disponível, o serviço autentica a requisição.
+   - Caso contrário, retorna uma resposta com status `403 Forbidden`.
 
